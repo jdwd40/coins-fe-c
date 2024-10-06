@@ -21,15 +21,15 @@ const theme = extendTheme({
       700: '#0f5669',
       800: '#07313e',
       900: '#011015',
-    },
-    background: '#1a202c', // Chakra's default dark mode background
-    surface: '#2d3748', // A slightly lighter surface for card elements
-    accent: '#d53f8c',  // Funky accent color - bright pink
-    muted: '#718096', // Muted grey for less important elements
-  },
-  fonts: {
-    heading: '"Poppins", sans-serif',  // Funky and professional font for headings
-    body: '"Roboto", sans-serif',      // Clean and modern font for body text
+        },
+        background: '#1a202c', // Chakra's default dark mode background
+        surface: '#2d3748', // A slightly lighter surface for card elements
+        accent: '#ff9800',  // New accent color - bright orange
+        muted: '#718096', // Muted grey for less important elements
+      },
+      fonts: {
+        heading: '"Poppins", sans-serif',  // Funky and professional font for headings
+        body: '"Roboto", sans-serif',      // Clean and modern font for body text
   },
   styles: {
     global: {
