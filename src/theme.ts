@@ -28,8 +28,8 @@ const theme = extendTheme({
     muted: '#718096', // Muted grey for less important elements
   },
   fonts: {
-    heading: ''Poppins', sans-serif',  // Funky and professional font for headings
-    body: ''Roboto', sans-serif',      // Clean and modern font for body text
+    heading: '"Poppins", sans-serif',  // Funky and professional font for headings
+    body: '"Roboto", sans-serif',      // Clean and modern font for body text
   },
   styles: {
     global: {
