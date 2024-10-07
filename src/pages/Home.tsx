@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleExploreCoins = () => {
-    navigate('/coins');
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -18,12 +18,8 @@ const Home: React.FC = () => {
         <Text fontSize="xl" color="gray.300">
           Manage your cryptocurrency portfolio with ease and explore real-time coin data.
         </Text>
-        <Button
-          colorScheme="teal"
-          size="lg"
-          onClick={handleExploreCoins}
-        >
-          Explore Coins
+        <Button colorScheme="teal" size="lg" onClick={handleLogin}>
+          Go to Login
         </Button>
       </VStack>
     </Box>
