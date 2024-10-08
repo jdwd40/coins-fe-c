@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Heading, Text, VStack, Spinner } from '@chakra-ui/react';
 import { getCoinDetails } from '../services/coinService';
+import CoinPriceHistoryGraph from '../components/CoinPriceHistoryGraph';
 
 interface CoinDetails {
   coin_id: number;
@@ -76,6 +77,7 @@ const CoinDetailsPage: React.FC = () => {
         <Text fontSize="lg" color="gray.300">
           Description: {coinDetails.description || 'No description available.'}
         </Text>
+        <CoinPriceHistoryGraph coinId={coinDetails.coin_id} />
       </VStack>
     </Box>
   );
