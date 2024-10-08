@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Heading, Text, VStack, Spinner, HStack } from '@chakra-ui/react';
+import { Box, Heading, Text, VStack, Spinner } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import { getCoins, getMarketStats } from '../services/coinService';
 import CoinListItem from '../components/CoinListItem';
 
@@ -10,16 +11,14 @@ interface Coin {
   current_price: number;
 }
 
-interface EventDetails {
-  type: string;
-  start_time: string;
-  end_time: string;
-  details: string | null;
-  time_left: number;
-}
-
 interface MarketStats {
-  event: EventDetails;
+  event: {
+    type: string;
+    start_time: string;
+    end_time: string;
+    details: string | null;
+    time_left: number;
+  };
   marketValue: string;
   last5minsMarketValue: string;
   percentage5mins: string;
@@ -33,6 +32,7 @@ const Home: React.FC = () => {
   const [coins, setCoins] = useState<Coin[]>([]);
   const [marketStats, setMarketStats] = useState<MarketStats | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCoinsAndStats = async () => {
@@ -48,6 +48,10 @@ const Home: React.FC = () => {
     };
     fetchCoinsAndStats();
   }, []);
+
+  const handleCoinClick = (coinId: number) => {
+    navigate(`/coins/${coinId}`);
+  };
 
   return (
     <Box p={8} textAlign="center">
@@ -78,30 +82,18 @@ const Home: React.FC = () => {
                   <Heading as="h3" size="md" color="brand.500" mb={2}>
                     Market Statistics
                   </Heading>
-                  <HStack justifyContent="space-around" spacing={8}>
-                    <Box>
-                      <Text fontSize="lg" color="teal.400">Market Value:</Text>
-                      <Text fontSize="md" color="gray.300">{marketStats.marketValue}</Text>
-                    </Box>
-                    <Box>
-                      <Text fontSize="lg" color="teal.400">5 min Change:</Text>
-                      <Text fontSize="md" color="gray.300">{marketStats.percentage5mins}</Text>
-                    </Box>
-                    <Box>
-                      <Text fontSize="lg" color="teal.400">10 min Change:</Text>
-                      <Text fontSize="md" color="gray.300">{marketStats.percentage10mins}</Text>
-                    </Box>
-                    <Box>
-                      <Text fontSize="lg" color="teal.400">30 min Change:</Text>
-                      <Text fontSize="md" color="gray.300">{marketStats.percentage30mins}</Text>
-                    </Box>
-                  </HStack>
+                  <Text fontSize="lg" color="teal.400">Market Value: {marketStats.marketValue}</Text>
+                  <Text fontSize="lg" color="teal.400">5 min Change: {marketStats.percentage5mins}</Text>
+                  <Text fontSize="lg" color="teal.400">10 min Change: {marketStats.percentage10mins}</Text>
+                  <Text fontSize="lg" color="teal.400">30 min Change: {marketStats.percentage30mins}</Text>
                 </Box>
               </Box>
             )}
             <VStack spacing={4} w="full">
               {coins.map((coin) => (
-                <CoinListItem key={coin.coin_id} coin={coin} />
+                <Box key={coin.coin_id} onClick={() => handleCoinClick(coin.coin_id)} cursor="pointer">
+                  <CoinListItem coin={coin} />
+                </Box>
               ))}
             </VStack>
           </>
